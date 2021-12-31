@@ -40,7 +40,12 @@ public class MovieListActivity extends AppCompatActivity {
 
 
         button=findViewById(R.id.btn);
+        button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
 
+            }
+        });
 
     }
 
