@@ -22,4 +22,9 @@ public class MoviewListViewMOdel extends ViewModel {
     public MutableLiveData<List<MovieModel>> getmMovies() {
         return movieRepository.getmMovies();
     }
+
+    public void searchMovieApi(String query, int pageNumber){
+
+        movieRepository.searchMovieApi(query,pageNumber);
+    }
 }

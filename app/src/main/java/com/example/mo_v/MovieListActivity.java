@@ -38,12 +38,14 @@ public class MovieListActivity extends AppCompatActivity {
 
         moviewListViewMOdel=new ViewModelProvider(this).get(MoviewListViewMOdel.class);
 
+        ObserAnyChange();
+
 
         button=findViewById(R.id.btn);
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+                searchMovieApi("Fast",1);
             }
         });
 
@@ -55,12 +57,23 @@ public class MovieListActivity extends AppCompatActivity {
         moviewListViewMOdel.getmMovies().observe(this, new Observer<List<MovieModel>>() {
             @Override
             public void onChanged(List<MovieModel> movieModels) {
-
+                if(movieModels!=null){
+                    for(MovieModel movieModel:movieModels){
+                        Log.v("Tag","On Change  " +movieModel.getTitle());
+                    }
+                }
             }
         });
     }
 
 
+
+    private void searchMovieApi(String query, int pageNumber){
+        moviewListViewMOdel.searchMovieApi(query,pageNumber);
+
+    }
+
+/*
     private void GetRetrofitResponse() {
 
         MovieApi movieApi=Servicey.getMovieApi();
@@ -119,5 +132,5 @@ public class MovieListActivity extends AppCompatActivity {
             }
         });
 
-    }
+    }*/
 }

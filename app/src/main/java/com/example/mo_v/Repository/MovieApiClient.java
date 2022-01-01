@@ -47,7 +47,7 @@ public class MovieApiClient {
     }
 
 
-    private void searchMovieApi(String queryy,int pageenumbeer) {
+    public void searchMovieApi(String queryy,int pageenumbeer) {
 
         if(retrieveMoviesRunnable!=null)
         {
