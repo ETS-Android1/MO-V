@@ -17,7 +17,7 @@ public class AppExecutors {
 
     }
 
-    private ScheduledExecutorService mNetworkIO= Executors.newScheduledThreadPool(3);
+    private ScheduledExecutorService mNetworkIO= Executors.newScheduledThreadPool(1);
 
     public ScheduledExecutorService getmNetworkIO(){
         return mNetworkIO;

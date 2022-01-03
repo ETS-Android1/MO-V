@@ -3,6 +3,8 @@ package com.example.mo_v;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
 import android.util.Log;
@@ -10,6 +12,8 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
 
+import com.adapter.MovieRecyclerView;
+import com.adapter.OmMovieListener;
 import com.example.mo_v.models.MovieModel;
 import com.example.mo_v.niewmodels.MoviewListViewMOdel;
 import com.example.mo_v.request.Servicey;
@@ -27,10 +31,11 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class MovieListActivity extends AppCompatActivity {
-    Button button;
+public class MovieListActivity extends AppCompatActivity implements OmMovieListener {
     MoviewListViewMOdel moviewListViewMOdel;
-
+    RecyclerView recyclerView;
+    MovieRecyclerView movieRecyclerViewAdapter;
+    Button button;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -38,17 +43,12 @@ public class MovieListActivity extends AppCompatActivity {
 
         moviewListViewMOdel=new ViewModelProvider(this).get(MoviewListViewMOdel.class);
 
+        recyclerView=findViewById(R.id.recyclerview);
+
+        ConfigureRecyclerView();
         ObserAnyChange();
 
-
-        button=findViewById(R.id.btn);
-        button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                searchMovieApi("Fast",1);
-            }
-        });
-
+        searchMovieApi("fast",1);
     }
 
     //observing Any data Changing
@@ -60,6 +60,8 @@ public class MovieListActivity extends AppCompatActivity {
                 if(movieModels!=null){
                     for(MovieModel movieModel:movieModels){
                         Log.v("Tag","On Change  " +movieModel.getTitle());
+                        movieRecyclerViewAdapter.setmMovies(movieModels);
+
                     }
                 }
             }
@@ -72,6 +74,30 @@ public class MovieListActivity extends AppCompatActivity {
         moviewListViewMOdel.searchMovieApi(query,pageNumber);
 
     }
+
+
+    private void ConfigureRecyclerView(){
+        movieRecyclerViewAdapter=new MovieRecyclerView(this);
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        recyclerView.setAdapter(movieRecyclerViewAdapter);
+    }
+
+    @Override
+    public void onMovieClick(int position) {
+        Toast.makeText(this, "position"+position, Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void onCategoryClick(String category) {
+
+    }
+
+
+
+
+
+
+
 
 /*
     private void GetRetrofitResponse() {

@@ -64,7 +64,7 @@ public class MovieApiClient {
                 //for cutting the flow
                 myHandler.cancel(true);
             }
-        }, 5000, TimeUnit.MICROSECONDS);
+        }, 300, TimeUnit.MILLISECONDS);
 
         }
 
@@ -86,6 +86,7 @@ public class MovieApiClient {
             public void run() {
 
                 try {
+
                     Response response=getMovies(query,pageNumber).execute();
                     if (cancelRequest)
                     {
