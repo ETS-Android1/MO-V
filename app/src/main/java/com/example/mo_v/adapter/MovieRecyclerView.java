@@ -1,4 +1,4 @@
-package com.adapter;
+package com.example.mo_v.adapter;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -11,8 +11,6 @@ import com.bumptech.glide.Glide;
 import com.example.mo_v.R;
 import com.example.mo_v.models.MovieModel;
 
-import java.security.PrivateKey;
-import java.util.ArrayList;
 import java.util.List;
 
 public class MovieRecyclerView extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
@@ -59,7 +57,31 @@ public class MovieRecyclerView extends RecyclerView.Adapter<RecyclerView.ViewHol
     }
 
     public void setmMovies(List<MovieModel> mMovies) {
-        this.mMovies = mMovies;
-        notifyDataSetChanged();
+            this.mMovies = mMovies;
+            notifyDataSetChanged();
+
     }
+
+    public MovieModel getSelectedMovie(int position){
+
+        if(mMovies!=null){
+            if( mMovies.size()>0){
+                return mMovies.get(position);
+            }
+        }
+        return null;
+
+    }
+
+
+   /* public void clear() {
+        int size = mMovies.size();
+        if (size > 0) {
+            for (int i = 0; i < size; i++) {
+                mMovies.remove(0);
+            }
+
+            notifyItemRangeRemoved(0, size);
+        }
+    }*/
 }

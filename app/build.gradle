@@ -49,4 +49,10 @@ dependencies {
     implementation "androidx.lifecycle:lifecycle-viewmodel:$lifecycle_version"
     // LiveData
     implementation "androidx.lifecycle:lifecycle-livedata:$lifecycle_version"
+
+
+    //matrial design
+    implementation 'com.google.android.material:material:1.6.0-alpha01'
+
+
 }

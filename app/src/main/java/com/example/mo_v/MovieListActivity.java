@@ -1,35 +1,26 @@
 package com.example.mo_v;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.SearchView;
+import androidx.appcompat.widget.Toolbar;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
 
-import com.adapter.MovieRecyclerView;
-import com.adapter.OmMovieListener;
+import com.example.mo_v.adapter.MovieRecyclerView;
+import com.example.mo_v.adapter.OmMovieListener;
 import com.example.mo_v.models.MovieModel;
 import com.example.mo_v.niewmodels.MoviewListViewMOdel;
-import com.example.mo_v.request.Servicey;
-import com.example.mo_v.response.MovieSearchResponse;
-import com.example.mo_v.utils.Credentials;
-import com.example.mo_v.utils.MovieApi;
 
-import java.io.IOException;
-import java.security.Provider;
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Observable;
-
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
 
 public class MovieListActivity extends AppCompatActivity implements OmMovieListener {
     MoviewListViewMOdel moviewListViewMOdel;
@@ -41,6 +32,11 @@ public class MovieListActivity extends AppCompatActivity implements OmMovieListe
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+         Toolbar toolbar=findViewById(R.id.tool_bar);
+         setSupportActionBar(toolbar);
+
+         SetUpASearchView();
+
         moviewListViewMOdel=new ViewModelProvider(this).get(MoviewListViewMOdel.class);
 
         recyclerView=findViewById(R.id.recyclerview);
@@ -48,8 +44,9 @@ public class MovieListActivity extends AppCompatActivity implements OmMovieListe
         ConfigureRecyclerView();
         ObserAnyChange();
 
-        searchMovieApi("fast",1);
     }
+
+
 
     //observing Any data Changing
 
@@ -61,7 +58,6 @@ public class MovieListActivity extends AppCompatActivity implements OmMovieListe
                     for(MovieModel movieModel:movieModels){
                         Log.v("Tag","On Change  " +movieModel.getTitle());
                         movieRecyclerViewAdapter.setmMovies(movieModels);
-
                     }
                 }
             }
@@ -70,21 +66,36 @@ public class MovieListActivity extends AppCompatActivity implements OmMovieListe
 
 
 
-    private void searchMovieApi(String query, int pageNumber){
-        moviewListViewMOdel.searchMovieApi(query,pageNumber);
 
-    }
 
 
     private void ConfigureRecyclerView(){
         movieRecyclerViewAdapter=new MovieRecyclerView(this);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         recyclerView.setAdapter(movieRecyclerViewAdapter);
+
+
+
+        recyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
+            @Override
+            public void onScrollStateChanged(@NonNull RecyclerView recyclerView, int newState) {
+                if(!recyclerView.canScrollVertically(1)){
+                    moviewListViewMOdel.searchNextPage();
+                }
+            }
+        });
+
+
+
+
+
     }
 
     @Override
     public void onMovieClick(int position) {
-        Toast.makeText(this, "position"+position, Toast.LENGTH_SHORT).show();
+        Intent intent=new Intent(this,DetailsActivity.class);
+        intent.putExtra("movie",movieRecyclerViewAdapter.getSelectedMovie(position));
+        startActivity(intent);
     }
 
     @Override
@@ -93,6 +104,25 @@ public class MovieListActivity extends AppCompatActivity implements OmMovieListe
     }
 
 
+    private void SetUpASearchView() {
+       final SearchView searchView=findViewById(R.id.search_view);
+       searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+           @Override
+           public boolean onQueryTextSubmit(String query) {
+               moviewListViewMOdel.searchMovieApi(query,1);
+
+               return false;
+           }
+
+           @Override
+           public boolean onQueryTextChange(String newText) {
+               return false;
+           }
+       });
+
+
+
+    }
 
 
 

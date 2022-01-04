@@ -1,6 +1,5 @@
-package com.adapter;
+package com.example.mo_v.adapter;
 
-import android.media.Image;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.RatingBar;

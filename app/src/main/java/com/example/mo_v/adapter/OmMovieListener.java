@@ -1,4 +1,4 @@
-package com.adapter;
+package com.example.mo_v.adapter;
 
 public interface OmMovieListener {
 
