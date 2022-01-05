@@ -12,7 +12,9 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
 import android.widget.Button;
+import android.widget.LinearLayout;
 import android.widget.Toast;
 
 import com.example.mo_v.adapter.MovieRecyclerView;
@@ -25,8 +27,12 @@ import java.util.List;
 public class MovieListActivity extends AppCompatActivity implements OmMovieListener {
     MoviewListViewMOdel moviewListViewMOdel;
     RecyclerView recyclerView;
+    RecyclerView recyclerView_search;
     MovieRecyclerView movieRecyclerViewAdapter;
     Button button;
+
+    boolean isPopular= true;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -43,12 +49,31 @@ public class MovieListActivity extends AppCompatActivity implements OmMovieListe
 
         ConfigureRecyclerView();
         ObserAnyChange();
+        ObservePopulaMovies();
+
+        moviewListViewMOdel.searchMovieApipop(1);
+
+
 
     }
 
+    private void ObservePopulaMovies() {
+        moviewListViewMOdel.getmMoviesPop().observe(this, new Observer<List<MovieModel>>() {
+            @Override
+            public void onChanged(List<MovieModel> movieModels) {
+                if(movieModels!=null){
+                    for(MovieModel movieModel:movieModels){
+                        Log.v("Tag","On Change  " +movieModel.getTitle());
+                        movieRecyclerViewAdapter.setmMovies(movieModels);
+                    }
+                }
+            }
+        });
+    }
 
 
     //observing Any data Changing
+
 
     private void ObserAnyChange(){
         moviewListViewMOdel.getmMovies().observe(this, new Observer<List<MovieModel>>() {
@@ -71,7 +96,7 @@ public class MovieListActivity extends AppCompatActivity implements OmMovieListe
 
     private void ConfigureRecyclerView(){
         movieRecyclerViewAdapter=new MovieRecyclerView(this);
-        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        recyclerView.setLayoutManager(new LinearLayoutManager(this,LinearLayoutManager.HORIZONTAL,false));
         recyclerView.setAdapter(movieRecyclerViewAdapter);
 
 
@@ -120,6 +145,12 @@ public class MovieListActivity extends AppCompatActivity implements OmMovieListe
            }
        });
 
+       searchView.setOnClickListener(new View.OnClickListener() {
+           @Override
+           public void onClick(View v) {
+               isPopular=false;
+           }
+       });
 
 
     }

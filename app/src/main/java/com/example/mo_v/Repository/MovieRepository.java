@@ -30,6 +30,9 @@ public class MovieRepository {
     public MutableLiveData<List<MovieModel>> getmMovies() {
         return movieApiClient.getmMovies();
     }
+    public MutableLiveData<List<MovieModel>> getmMoviesPop() {
+        return movieApiClient.getmMoviesPop();
+    }
 
     public void searchMovieApi(String query,int pagenumber){
         mQuery=query;
@@ -37,6 +40,16 @@ public class MovieRepository {
         movieApiClient.searchMovieApi(query,pagenumber);
 
     }
+    public void searchMovieApiPOp(int pagenumber){
+
+        mPageNumber=pagenumber;
+        movieApiClient.searchMovieApiPop(pagenumber);
+
+    }
+
+
+
+
     public void searchNextMovieApi(){
 
         searchMovieApi(mQuery,mPageNumber+1);

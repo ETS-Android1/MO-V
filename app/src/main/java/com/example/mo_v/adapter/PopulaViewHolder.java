@@ -10,25 +10,25 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.mo_v.R;
 
-public class MovieViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
+public class PopulaViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
    //Widgets
 
-   ImageView movieimg;
-   TextView title, release_date, duration;
-   RatingBar ratingBar;
+   ImageView movieimg22;
+
+   RatingBar ratingBar22;
 
    OmMovieListener omMovieListener;
 
-    public MovieViewHolder(@NonNull View itemView, OmMovieListener omMovieListener) {
+    public PopulaViewHolder(@NonNull View itemView, OmMovieListener omMovieListener) {
         super(itemView);
 
         this.omMovieListener=omMovieListener;
-        movieimg=itemView.findViewById(R.id.movie_image);
+        movieimg22=itemView.findViewById(R.id.movie_image);
 //        title=itemView.findViewById(R.id.movie_title);
   //      release_date=itemView.findViewById(R.id.movie_category);
     //    duration=itemView.findViewById(R.id.movie_duration);
-        ratingBar=itemView.findViewById(R.id.rating_bar);
+        ratingBar22=itemView.findViewById(R.id.rating_bar);
 
         itemView.setOnClickListener(this);
 

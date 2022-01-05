@@ -3,6 +3,8 @@ package com.example.mo_v.utils;
 import com.example.mo_v.models.MovieModel;
 import com.example.mo_v.response.MovieSearchResponse;
 
+import java.util.List;
+
 import retrofit2.Call;
 import retrofit2.http.GET;
 import retrofit2.http.Part;
@@ -19,6 +21,31 @@ public interface MovieApi {
             @Query("query") String Query,
             @Query("page") int page
     );
+
+
+
+
+    //Get popular movie
+    //https://api.themoviedb.org/3/movie/popular?api_key=16189ebd9e3212ad7e4a873d57713406&page=1
+
+    @GET("/3/movie/popular")
+    Call<MovieSearchResponse>getPopular(
+            @Query("api_key")String key,
+            @Query("page") int page
+    );
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
     //search by ID

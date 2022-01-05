@@ -10,6 +10,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.bumptech.glide.Glide;
 import com.example.mo_v.R;
 import com.example.mo_v.models.MovieModel;
+import com.example.mo_v.utils.Credentials;
 
 import java.util.List;
 
@@ -17,6 +18,10 @@ public class MovieRecyclerView extends RecyclerView.Adapter<RecyclerView.ViewHol
 
     private List<MovieModel> mMovies;
     private OmMovieListener omMovieListener;
+
+    private static final int DISPLAY_POPUALAR=1;
+    private static final int DISPLAY_SEARCH=2;
+
 
     public MovieRecyclerView(OmMovieListener omMovieListener) {
         this.omMovieListener = omMovieListener;
@@ -28,22 +33,36 @@ public class MovieRecyclerView extends RecyclerView.Adapter<RecyclerView.ViewHol
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
 
-        View  view= LayoutInflater.from(parent.getContext()).inflate(R.layout.movie_list_item,parent,false);
+        View view = null;
+        if (viewType == DISPLAY_SEARCH) {
+            view = LayoutInflater.from(parent.getContext()).inflate(R.layout.movie_list_item, parent, false);
 
-        return new MovieViewHolder(view,omMovieListener);
+            return new MovieViewHolder(view, omMovieListener);
+        } else{
+            view = LayoutInflater.from(parent.getContext()).inflate(R.layout.popular_list_item, parent, false);
+        return new MovieViewHolder(view, omMovieListener);
+    }
+
+
     }
 
     @Override
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
-        ((MovieViewHolder)holder).title.setText(mMovies.get(position).getTitle());
-        ((MovieViewHolder)holder).duration.setText(mMovies.get(position).getOriginal_language());
-        ((MovieViewHolder)holder).release_date.setText(mMovies.get(position).getRelease_date());
-        ((MovieViewHolder)holder).ratingBar.setRating((mMovies.get(position).getVote_average())/2);
 
+       int itemtype=getItemViewType(position);
+       if(itemtype==DISPLAY_SEARCH){
+           ((MovieViewHolder)holder).ratingBar.setRating((mMovies.get(position).getVote_average())/2);
+           Glide.with(holder.itemView.getContext())
+                   .load("https://image.tmdb.org/t/p/w500/"+mMovies.get(position).getPoster_path())
+                   .into(((MovieViewHolder)holder).movieimg);
+       }
+       else{
+           ((PopulaViewHolder)holder).ratingBar22.setRating((mMovies.get(position).getVote_average())/2);
+           Glide.with(holder.itemView.getContext())
+                   .load("https://image.tmdb.org/t/p/w500/"+mMovies.get(position).getPoster_path())
+                   .into(((PopulaViewHolder)holder).movieimg22);
 
-        Glide.with(holder.itemView.getContext())
-                .load("https://image.tmdb.org/t/p/w500/"+mMovies.get(position).getPoster_path())
-                .into(((MovieViewHolder)holder).movieimg);
+        }
 
 
     }
@@ -74,7 +93,18 @@ public class MovieRecyclerView extends RecyclerView.Adapter<RecyclerView.ViewHol
     }
 
 
-   /* public void clear() {
+    @Override
+    public int getItemViewType(int position) {
+        if(Credentials.Popular){
+            return DISPLAY_POPUALAR;
+
+        }else  return DISPLAY_SEARCH;
+    }
+
+
+
+
+    /* public void clear() {
         int size = mMovies.size();
         if (size > 0) {
             for (int i = 0; i < size; i++) {

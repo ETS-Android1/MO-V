@@ -7,4 +7,7 @@ public class Credentials {
 
     public static String API_Key="16189ebd9e3212ad7e4a873d57713406";
 
+    public static boolean Popular=false;
+
+
 }
