@@ -6,7 +6,11 @@ Tools used:
   -RestroFit
   -MVVM
   -Glide
-  [Vedio (2)](https://user-images.githubusercontent.com/44526915/148230936-605cdaf5-1165-4c04-b899-d5384195e9ea.mp4)
-)
+
+
 
   
+
+https://user-images.githubusercontent.com/44526915/148231479-4cb4998d-5da6-46d6-ac6c-ee70d67495ad.mp4
+
+
