@@ -6,6 +6,7 @@ Tools used:
   -RestroFit
   -MVVM
   -Glide
-  ![Vedio (2)](https://github.com/bedoasd/MO-V/blob/master/video_2022-01-05_15-53-16.mp4)
+  ![Vedio (2)](https://user-images.githubusercontent.com/44526915/148230936-605cdaf5-1165-4c04-b899-d5384195e9ea.mp4)
+)
 
   
