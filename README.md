@@ -1,16 +1,17 @@
 # MO-V
 Movie App is an application that displays movies and allows you (search for any movie - learn more about movie details (name, release date ,rating,overview)))
 Tools used:
-  -Android Studio
-  -Java
-  -RestroFit
-  -MVVM
-  -Glide
+  <br/>-Android Studio
+  <br/>-Java
+  <br/>-RestroFit
+  <br/>-MVVM
+  <br/>-Glide
 
 
 
-  
 
-https://user-images.githubusercontent.com/44526915/148231479-4cb4998d-5da6-46d6-ac6c-ee70d67495ad.mp4
+https://user-images.githubusercontent.com/44526915/152084245-f6ae6ca9-5c4f-4a03-92e1-da813566775c.mp4
+
+
 
 
