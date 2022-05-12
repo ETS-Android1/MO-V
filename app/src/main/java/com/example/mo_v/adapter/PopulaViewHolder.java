@@ -16,8 +16,9 @@ public class PopulaViewHolder extends RecyclerView.ViewHolder implements View.On
 
    ImageView movieimg22;
 
-   RatingBar ratingBar22;
+   RatingBar ratingBar;
 
+   TextView release_date;
    OmMovieListener omMovieListener;
 
     public PopulaViewHolder(@NonNull View itemView, OmMovieListener omMovieListener) {
@@ -26,9 +27,8 @@ public class PopulaViewHolder extends RecyclerView.ViewHolder implements View.On
         this.omMovieListener=omMovieListener;
         movieimg22=itemView.findViewById(R.id.movie_image);
 //        title=itemView.findViewById(R.id.movie_title);
-  //      release_date=itemView.findViewById(R.id.movie_category);
     //    duration=itemView.findViewById(R.id.movie_duration);
-        ratingBar22=itemView.findViewById(R.id.rating_bar);
+        ratingBar=itemView.findViewById(R.id.rating_bar);
 
         itemView.setOnClickListener(this);
 

@@ -58,26 +58,7 @@ public class MovieApiClient {
 
 
 
-    public void searchMovieApi(String queryy,int pageenumbeer) {
 
-        if(retrieveMoviesRunnable!=null)
-        {
-            retrieveMoviesRunnable=null;
-        }
-
-        retrieveMoviesRunnable=new RetrieveMoviesRunnable(queryy,pageenumbeer);
-
-        final Future myHandler = AppExecutors.getInstance().getmNetworkIO().submit(retrieveMoviesRunnable);
-
-        AppExecutors.getInstance().getmNetworkIO().schedule(new Runnable() {
-            @Override
-            public void run() {
-                //for cutting the flow
-                myHandler.cancel(true);
-            }
-        }, 300, TimeUnit.MILLISECONDS);
-
-        }
 
     public void searchMovieApiPop(int pageenumbeer) {
 
@@ -97,6 +78,27 @@ public class MovieApiClient {
                 myHandler2.cancel(true);
             }
         }, 1000, TimeUnit.MILLISECONDS);
+
+    }
+
+    public void searchMovieApi(String queryy,int pageenumbeer) {
+
+        if(retrieveMoviesRunnable!=null)
+        {
+            retrieveMoviesRunnable=null;
+        }
+
+        retrieveMoviesRunnable=new RetrieveMoviesRunnable(queryy,pageenumbeer);
+
+        final Future myHandler = AppExecutors.getInstance().getmNetworkIO().submit(retrieveMoviesRunnable);
+
+        AppExecutors.getInstance().getmNetworkIO().schedule(new Runnable() {
+            @Override
+            public void run() {
+                //for cutting the flow
+                myHandler.cancel(true);
+            }
+        }, 300, TimeUnit.MILLISECONDS);
 
     }
 
@@ -169,8 +171,9 @@ public class MovieApiClient {
 
                    }
                   private void cancelRequest(){
-                  Log.v("Tag","Cancel Serach Request ");
-                  cancelRequest=true;
+                      Log.v("Tag","Cancel Serach Request ");
+
+                      cancelRequest=true;
 
                 }
 

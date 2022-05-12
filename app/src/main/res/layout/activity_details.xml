@@ -48,6 +48,15 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/imageid" />
 
+        <TextView
+            android:id="@+id/release_datee"
+            android:layout_width="wrap_content"
+            android:layout_height="20dp"
+            android:textSize="15sp"
+            android:textColor="#DD9223"
+            android:layout_marginStart="15dp"
+            />
+
         <RatingBar
             android:id="@+id/d_ratingBar"
             android:layout_width="220dp"

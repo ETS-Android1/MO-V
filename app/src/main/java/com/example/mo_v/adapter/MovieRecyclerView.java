@@ -1,6 +1,7 @@
 package com.example.mo_v.adapter;
 
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 
@@ -49,20 +50,43 @@ public class MovieRecyclerView extends RecyclerView.Adapter<RecyclerView.ViewHol
     @Override
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
 
+
        int itemtype=getItemViewType(position);
        if(itemtype==DISPLAY_SEARCH){
-           ((MovieViewHolder)holder).ratingBar.setRating((mMovies.get(position).getVote_average())/2);
+           ((MovieViewHolder)holder).ratingBar2.setRating((mMovies.get(position).getVote_average())/2);
+           ((MovieViewHolder) holder).ratingBar2.setOnTouchListener(new View.OnTouchListener() {
+               @Override
+               public boolean onTouch(View v, MotionEvent event) {
+                   return true;
+               }
+
+           });
+           ((MovieViewHolder) holder).ratingBar2.setFocusable(false);
            Glide.with(holder.itemView.getContext())
                    .load("https://image.tmdb.org/t/p/w500/"+mMovies.get(position).getPoster_path())
                    .into(((MovieViewHolder)holder).movieimg);
+
        }
        else{
-           ((PopulaViewHolder)holder).ratingBar22.setRating((mMovies.get(position).getVote_average())/2);
+           ((PopulaViewHolder)holder).ratingBar.setRating((mMovies.get(position).getVote_average())/2);
+           ((PopulaViewHolder) holder).ratingBar.setOnTouchListener(new View.OnTouchListener() {
+               @Override
+               public boolean onTouch(View v, MotionEvent event) {
+                   return true;
+               }
+
+           });
+
+           ((PopulaViewHolder) holder).ratingBar.setFocusable(false);
            Glide.with(holder.itemView.getContext())
                    .load("https://image.tmdb.org/t/p/w500/"+mMovies.get(position).getPoster_path())
                    .into(((PopulaViewHolder)holder).movieimg22);
 
-        }
+
+
+       }
+
+
 
 
     }

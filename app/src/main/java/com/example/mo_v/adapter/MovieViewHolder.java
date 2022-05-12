@@ -16,7 +16,7 @@ public class MovieViewHolder extends RecyclerView.ViewHolder implements View.OnC
 
    ImageView movieimg;
    TextView title, release_date, duration;
-   RatingBar ratingBar;
+   RatingBar ratingBar2;
 
    OmMovieListener omMovieListener;
 
@@ -25,10 +25,7 @@ public class MovieViewHolder extends RecyclerView.ViewHolder implements View.OnC
 
         this.omMovieListener=omMovieListener;
         movieimg=itemView.findViewById(R.id.movie_image);
-//        title=itemView.findViewById(R.id.movie_title);
-  //      release_date=itemView.findViewById(R.id.movie_category);
-    //    duration=itemView.findViewById(R.id.movie_duration);
-        ratingBar=itemView.findViewById(R.id.rating_bar);
+        ratingBar2=itemView.findViewById(R.id.rating_bar2);
 
         itemView.setOnClickListener(this);
 

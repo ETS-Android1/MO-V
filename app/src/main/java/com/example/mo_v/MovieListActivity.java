@@ -47,6 +47,8 @@ public class MovieListActivity extends AppCompatActivity implements OmMovieListe
 
         recyclerView=findViewById(R.id.recyclerview);
 
+
+
         ConfigureRecyclerView();
         ObserAnyChange();
         ObservePopulaMovies();
@@ -109,6 +111,7 @@ public class MovieListActivity extends AppCompatActivity implements OmMovieListe
                 }
             }
         });
+
 
 
 

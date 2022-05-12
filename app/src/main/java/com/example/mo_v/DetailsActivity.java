@@ -16,7 +16,7 @@ import com.example.mo_v.models.MovieModel;
 public class DetailsActivity extends AppCompatActivity {
 
     ImageView imageView;
-    TextView title,description ;
+    TextView title, description, release_date;
     RatingBar ratingBar;
 
     @Override
@@ -24,10 +24,11 @@ public class DetailsActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_details);
 
-        imageView=findViewById(R.id.imageid);
-        title=findViewById(R.id.textView_title);
-        description=findViewById(R.id.description);
-        ratingBar=findViewById(R.id.d_ratingBar);
+        imageView = findViewById(R.id.imageid);
+        title = findViewById(R.id.textView_title);
+        description = findViewById(R.id.description);
+        ratingBar = findViewById(R.id.d_ratingBar);
+        release_date=findViewById(R.id.release_datee);
 
         GetDataFromIntent();
 
@@ -35,22 +36,22 @@ public class DetailsActivity extends AppCompatActivity {
     }
 
     private void GetDataFromIntent() {
-        if(getIntent().hasExtra("movie"))
-        {
 
-        MovieModel movieModel=getIntent().getParcelableExtra("movie");
+        if (getIntent().hasExtra("movie")) {
 
-        title.setText(movieModel.getTitle());
-        description.setText(movieModel.getOverview());
+            MovieModel movieModel = getIntent().getParcelableExtra("movie");
+
+            title.setText(movieModel.getTitle());
+            description.setText(movieModel.getOverview());
             description.setMovementMethod(new ScrollingMovementMethod());
-
-            ratingBar.setRating((movieModel.getVote_average())/2);
+            release_date.setText(movieModel.getRelease_date());
+            ratingBar.setRating((movieModel.getVote_average()) / 2);
 
             Glide.with(this)
-                    .load("https://image.tmdb.org/t/p/w500/"+movieModel.getPoster_path())
+                    .load("https://image.tmdb.org/t/p/w500/" + movieModel.getPoster_path())
                     .into(imageView);
 
-    }
+        }
 
     }
 }
